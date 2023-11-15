@@ -1,0 +1,71 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Animal from '../components/Animal.astro';
+import Anuncio from '../components/Anuncio.astro';
+import Post from  '../components/Post.astro';
+
+const urlAnimal = `${import.meta.env.PUBLIC_API_URL}/animals?populate=imagen`
+const urlBlog = `${import.meta.env.PUBLIC_API_URL}/posts?populate=imagen`
+const urlAnuncio = `${import.meta.env.PUBLIC_API_URL}/anuncio?populate=imagen`
+
+
+const [resAnimal, resAnuncio, resBlog]= await Promise.all([
+	fetch(urlAnimal),
+	fetch(urlAnuncio),
+	fetch(urlBlog),
+])
+
+const [{data: animales},{data:anuncio}, {data:posts}] = await Promise.all([
+	resAnimal.json(),
+	resAnuncio.json(),
+	resBlog.json()
+])
+---
+
+<Layout title="Inicio" description="Página que te permite conocer y adoptar perros y gatos">
+
+	
+
+	<main class="contenedor">
+		<h1 class="heading">Dogadot</h1>
+
+		
+
+
+		<div class="grid">
+			{animales?.map(animal => (
+				<Animal
+					nombre={animal.attributes.nombre}
+					descripcion = {animal.attributes.descripcion}
+					url= {animal.attributes.url}
+					imagen={animal.attributes.imagen.data.attributes.url}
+				/>
+			))}
+		</div>
+	</main>
+	<Anuncio
+	titulo={anuncio.attributes.titulo}
+	descripcion={anuncio.attributes.descripcion}
+	imagen={anuncio.attributes.imagen.data.attributes.url}
+	/>
+	<section class="contenedor">
+		<h2 class="heading">Blog</h2>
+
+		<div class="grid">
+			{posts?.map(post => (
+				<Post
+					titulo={post.attributes.nombre}
+                    publishedAt={post.attributes.publishedAt}
+
+					contenido = {post.attributes.contenido}
+					url= {post.attributes.url}
+					imagen={post.attributes.imagen.data.attributes.url}
+				/>
+				))}
+		</div>
+	</section>
+
+	
+</Layout>
+
+

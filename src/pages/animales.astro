@@ -1,0 +1,32 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Animal from "../components/Animal.astro";
+
+const url = `${import.meta.env.PUBLIC_API_URL}/animals?populate=imagen`;
+const respuesta = await fetch(url);
+const { data } = await respuesta.json();
+---
+
+<Layout
+	title="Animales"
+	description="Página que te permite conocer y adoptar perros y gatos"
+>
+	<main class="contenedor">
+		<h1 class="heading">Nuestros Animales</h1>
+
+		<div class="grid">
+			{
+				data?.map((animal) => (
+				<Animal
+					nombre={animal.attributes.nombre}
+					descripcion = {animal.attributes.descripcion}
+					url= {animal.attributes.url}
+					imagen={animal.attributes.imagen.data.attributes.url}
+				/>
+				))
+			}
+		</div>
+	</main>
+</Layout>
+
+

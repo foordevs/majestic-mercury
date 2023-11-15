@@ -1,0 +1,74 @@
+---
+
+export interface Props {
+    nombre: string;
+    descripcion: string;
+    url: string;
+    imagen: string;
+}
+
+const {nombre, descripcion,imagen, url} = Astro.props
+---
+
+<div class="animal">
+
+    <img src={imagen} alt={`Imagen ${nombre}`}>
+
+    <div class="contenido">
+        <h3>{nombre}</h3>
+        <p class="descripcion">{descripcion}</p>
+
+        <a href={`/animals/${url}`} class="enlace">
+            Conocer
+        </a>
+    </div>
+</div>
+
+
+<style>
+
+.animal {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 1rem;
+    align-items: center;
+    max-width: 70rem;
+    margin: 0 auto;
+}
+.contenido {
+    padding: 1rem;
+}
+.contenido h3 {
+    font-size: 3rem;
+    text-transform: uppercase;
+    color: var(--primary);
+}
+.descripcion {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 6;
+    overflow: hidden;
+    font-size: 1.8rem;
+    text-transform: capitalize;
+}
+
+.enlace {
+    margin-top: 2rem;
+    display: block;
+    background-color: var(--black);
+    color: var(--white);
+    text-decoration: none;
+    padding: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    font-weight: 700;
+    transition-property: background-color;
+    transition-duration: 300ms;
+}
+.enlace:hover {
+    background-color: var(--primary);
+}
+
+
+    </style>

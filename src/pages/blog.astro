@@ -1,0 +1,33 @@
+---
+import Post from "../components/post.astro";
+import Layout from "../layouts/Layout.astro";
+
+
+const url = `${import.meta.env.PUBLIC_API_URL}/posts?populate=imagen`
+const respuesta = await fetch(url)
+const {data} = await respuesta.json()
+---
+
+<Layout
+	title="Blog"
+	description="Página que te permite conocer y adoptar perros y gatos"
+>
+	<main class="contenedor">
+		<h1 class="heading">Blog</h1>
+
+		<div class="grid">
+			{data?.map(post => (
+				<Post
+					titulo={post.attributes.nombre}
+                    publishedAt={post.attributes.publishedAt}
+					contenido = {post.attributes.contenido}
+					url= {post.attributes.url}
+					imagen={post.attributes.imagen.data.attributes.url}
+				/>
+				))}
+			
+		</div>
+	</main>
+</Layout>
+
+

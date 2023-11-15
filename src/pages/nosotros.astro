@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro';
+import nosotros from '../img/dog.avif';
+import { Image } from 'astro:assets';
+---
+
+<Layout title="Nosotros" description="Página que te permite conocer y adoptar perros y gatos">
+	<main class="contenedor">
+		<h1 class="heading">Nosotros</h1>
+
+		<div class="contenido">
+			<Image src={nosotros} alt="imagen sobre nosotros" />
+
+			<div>
+				<p>
+					Somos un equipo dedicado trabajamos voluntarios, veterinarios, entrenadores de perros y amantes de los animales que trabajamos incansablemente para rescatar, rehabilitar y encontrar hogares amorosos para perros que han sido abandonados, maltratados o que simplemente necesitan un nuevo comienzo. Nuestro compromiso con el bienestar de los perros es inquebrantable, y nuestra misión es crear un mundo en el que cada perro pueda disfrutar de una vida plena y feliz.
+				</p>
+
+				<p>
+					¡Únete a nosotros en nuestra lucha por hacer de este mundo un lugar mejor para nuestros amigos caninos!
+				</p>
+			</div>
+		
+		<div>
+			<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14061287.334047575!2d-106.82772063292369!3d30.63588864237206!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864c1ee34b5d173b%3A0xc47195f3abd6f711!2sRichardson%20Animal%20Shelter!5e0!3m2!1ses-419!2smx!4v1696885043895!5m2!1ses-419!2smx" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+	</main>
+</Layout>
+
+
+<style>
+.contenido {
+    display: flex;
+	justify-content: center;
+	flex-direction: column;
+	gap: 2rem;
+
+}
+
+@media (min-width: 992px) {
+    .contenido {
+		display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        align-items: center;
+    }
+}
+</style>
